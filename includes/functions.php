@@ -79,7 +79,7 @@ function wpuw_add_credits_to_user_account( $order_id ) {
 			$product_id                   = $item['product_id'];
 			$credit_amount                = floatval( get_post_meta( $product_id, "_credits_amount", true ) );
 			$current_users_wallet_balance = floatval( get_user_meta( $order->get_user_id(), "_uw_balance", true ) );
-			update_user_meta( $order->get_user_id(), "_uw_balance", ( $credit_amount + $current_users_wallet_balance ) );
+			update_user_meta( $order->get_user_id(), "_uw_balance", ( $credit_amount * $item['quantity'] + $current_users_wallet_balance ) );
 
 			do_action( 'uwcs_wallet_adjustment', $order->get_user_id(), $current_users_wallet_balance, $credit_amount );
 		}
